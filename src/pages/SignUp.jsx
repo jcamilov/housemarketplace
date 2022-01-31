@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { db } from "../firebase.config";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +28,35 @@ function SignUp() {
     }));
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      updateProfile(auth.currentUser, { displayName: name });
+
+      // a copy of the user data to avoid changing the state
+      const formDataCopy = { ...formData };
+      delete formDataCopy.password; // to avoid storing the password in the db
+      formDataCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
+
+      console.log("singup succesfull");
+      navigate("/");
+    } catch (error) {
+      toast.error(
+        "something went wrong with the registration. please try again"
+      );
+    }
+  };
+
   return (
     <>
       <div className="pageContainer"></div>
@@ -27,7 +64,7 @@ function SignUp() {
         <p className="pageHeader">Welcome back!</p>
       </header>
       <main>
-        <form>
+        <form onSubmit={onSubmit}>
           <input
             type="text"
             className="nameInput"
