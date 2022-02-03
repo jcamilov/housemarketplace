@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function Offers() {
-  return <div>Offers</div>;
+  return (
+    <>
+      <h1>Offers</h1>
+    </>
+  );
 }
 
 export default Offers;

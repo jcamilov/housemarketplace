@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
+import Oauth from "../components/Oauth";
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,10 +34,6 @@ function SignIn() {
       );
 
       if (userCredential.user) {
-        console.log(userCredential);
-        console.log(
-          `User ${userCredential.user.displayName} logged in succefully`
-        );
         navigate("/profile");
       }
     } catch (error) {
@@ -90,7 +86,7 @@ function SignIn() {
           </div>
         </form>
 
-        {/* {google oauth} */}
+        <Oauth />
         <Link to="/sign-up" className="registerLink">
           Sign Up instead
         </Link>
