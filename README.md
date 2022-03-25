@@ -1,33 +1,21 @@
 ![](https://github.com/jcamilov/housemarketplace/blob/master/public/houseMarketplaceLogo.png?raw=true)
 
-See it in action: **https://www.youtube.com/watch?v=RhUoc0kcQZU**
-Give it a try: **https://perfectsize.netlify.app/**
-
-(this is by no means a finished product but a work in progress as I am adding new features and looking for ways to optimize performance)
+See it in action: **https://realstatemarketplace.netlify.app/**
 
 ------------
 
 ### About this project
-**The problem** 
-Appareal retailers face up to 30% of returns causing a big impact on business revenue as well as environmental negative effects. Nearly half of the returns are related with sizing issues[1][2]. This problem grew due to the increment in ecommerce transations during and after COVID-19.
-
-I decided to implement a tool that might help reduce such negative impact by allowing users to get a size recommendation according to his/her specific body measuremnts matched with the item measuremnts (which btw changes from brand to brand). It is intended for online stores.
-
-### Notes
-- All the processing is done in the user's device so no video or images are stored in any cloud. 
-- By now it has been only tested on desktop.
-- Performance depends on the user's device but the loading time in a computer with core i3 processor, 8GB RAM takes about 5 seconds. This is a decent time that can be hidden if the model is loaded on page start (not done this way so far).
-
-### Features to implement
-- Face bluring. Although no personal information is stored
-- Fine tune position recognition to make it more robust a different angles of the camera.
-- Testing in mobile devices.
-
-
+This is a marketplace web app that allows users to post and find properties that are for sale or for rent. It was not intended to have nice frontend but rather to implement the funcionality and logic of a matching site.  
 
 ------------
 
-### Main development points
-- ReactJS App
-- It uses mediapipe as the AI tool to get a body mask
+### Main points
+- It uses Firebase Authentication for users to signup and login
+- Firestore as database to keep data about realstate assets and user's data itself
+- Firestorage to allow uploading pictures of properties
+- Managing location with API third-party provider
+- Uses Leafleat for displaying maps
+- SPA, pagination
+- Toast timered warnings
 - Deployed in netlify
+
